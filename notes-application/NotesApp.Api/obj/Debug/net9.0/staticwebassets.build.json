@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "VRrbUH4nlx86H81gKQF/rtZdh5nNH3RiHpIqpkgEw+w=",
+  "Source": "NotesApp.Api",
+  "BasePath": "_content/NotesApp.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

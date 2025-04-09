@@ -1,0 +1,24 @@
+# General
+node_modules/
+dist/
+.env
+.env.*.local
+*.log
+
+# Frontend specific
+notesapp-frontend/node_modules/
+notesapp-frontend/dist/
+notesapp-frontend/.vite/
+notesapp-frontend/.output/
+
+# Backend specific
+NotesApp.Api/bin/
+NotesApp.Api/obj/
+NotesApp.Api/appsettings*.json
+
+# IDE and OS files
+.vscode/
+*.suo
+*.user
+.DS_Store
+Thumbs.db
