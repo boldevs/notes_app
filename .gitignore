@@ -6,15 +6,15 @@ dist/
 *.log
 
 # Frontend specific
-notesapp-frontend/node_modules/
-notesapp-frontend/dist/
-notesapp-frontend/.vite/
-notesapp-frontend/.output/
+notes-application/notesapp-frontend/node_modules/
+notes-application/notesapp-frontend/dist/
+notes-application/notesapp-frontend/.vite/
+notes-application/notesapp-frontend/.output/
 
 # Backend specific
-NotesApp.Api/bin/
-NotesApp.Api/obj/
-NotesApp.Api/appsettings*.json
+notes-application/NotesApp.Api/bin/
+notes-application/NotesApp.Api/obj/
+notes-application/NotesApp.Api/appsettings*.json
 
 # IDE and OS files
 .vscode/
