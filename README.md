@@ -74,3 +74,5 @@ const API = axios.create({
 });
 ```
 
+## 📦 Usage
+Once the web application is running, please click the link to register as a user in order to gain access to the application.
