@@ -32,7 +32,7 @@
 
     <!-- Note Cards List -->
     <div>
-      <div class="h-[calc(100vh-240px)] overflow-y-auto px-2">
+      <div class="h-[calc(100vh-240px)] overflow-y-auto">
         <template v-if="filteredNotes.length">
           <NoteCard v-for="note in filteredNotes" :key="note.id" :title="note.title" :preview="note.content"
             :created-at="note.createdAt" :updated-at="note.updatedAt" @edit="() => editNote(note)"
@@ -63,7 +63,6 @@ import { Plus, Search } from '@element-plus/icons-vue'
 import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { useNoteStore } from '../store/note';
-import { createNote, getNotes, updateNote, deleteNotebyid } from '../utils/note'
 import { } from '../utils/note'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import type { Note } from '../types/note'
