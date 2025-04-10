@@ -61,6 +61,8 @@
 import { ref, onMounted, computed, watch, type Ref } from 'vue'
 import { Plus, Search } from '@element-plus/icons-vue'
 import { useRouter } from 'vue-router'
+import { storeToRefs } from 'pinia'
+import { useNoteStore } from '../store/note';
 import { createNote, getNotes, updateNote, deleteNotebyid } from '../utils/note'
 import { } from '../utils/note'
 import { ElMessage, ElMessageBox } from 'element-plus'
@@ -68,16 +70,17 @@ import type { Note } from '../types/note'
 import NoteCard from '../components/notes/NoteCard.vue'
 import NoteForm from '../components/notes/NoteForm.vue'
 
-
 onMounted(() => {
   loadNotes()
 })
+
+const noteStore = useNoteStore()
+const { notes, totalItems, isLoading } = storeToRefs(noteStore)
 
 const router = useRouter()
 const searchQuery = ref('')
 const showDialog = ref(false)
 const dialogMode = ref<'create' | 'edit'>('create')
-const notes = ref<Note[]>([])
 const newNote = ref<Partial<Note>>({
   id: undefined,
   title: '',
@@ -115,46 +118,34 @@ const filteredNotes = computed(() =>
 )
 
 const loadNotes = async () => {
-  try {
-    const res = await getNotes({
-      search: searchQuery.value,
-      page: pagination.value.page,
-      limit: pagination.value.limit,
-      sortBy: sortBy.value,
-      sortDesc: sortDesc.value,
-    });
+  await noteStore.fetchNotes({
+    search: searchQuery.value,
+    page: pagination.value.page,
+    limit: pagination.value.limit,
+    sortBy: sortBy.value,
+    sortDesc: sortDesc.value,
+  });
 
-
-    notes.value = res.items;
-    pagination.value.total = res.totalItems;
-  } catch (err) {
-    console.error('Failed to load notes', err);
-  }
-};
+  pagination.value.total = totalItems.value
+}
 
 const saveNote = async (note: { title: string; content: string }) => {
-  if (dialogMode.value === 'edit' && newNote.value.id) {
-    try {
-      await updateNote(newNote.value.id, note)
-      await loadNotes()
+  try {
+    if (dialogMode.value === 'edit' && newNote.value.id) {
+      await noteStore.editNote(newNote.value.id, note)
       ElMessage.success('Note updated successfully!')
-    } catch (error) {
-      console.error('Failed to update note', error)
-      ElMessage.error('Failed to update note!')
-    }
-  } else {
-    try {
-      await createNote(note)
-      await loadNotes()
+    } else {
+      await noteStore.addNote(note)
       ElMessage.success('Note created successfully!')
-    } catch (error) {
-      console.error('Failed to create note', error)
-      ElMessage.error('Failed to create note!')
     }
-  }
 
-  showDialog.value = false
+    await loadNotes()
+    showDialog.value = false
+  } catch (error) {
+    ElMessage.error('Failed to save note!')
+  }
 }
+
 
 const createNotes = () => {
   newNote.value = { title: '', content: '' }
@@ -170,27 +161,12 @@ const editNote = (note: Note) => {
 
 const deleteNote = async (id: number) => {
   try {
-
-    await ElMessageBox.confirm(
-      'Are you sure you want to delete this note?',
-      'Delete Confirmation',
-      {
-        confirmButtonText: 'Delete',
-        cancelButtonText: 'Cancel',
-        type: 'warning',
-      }
-    )
-
-    await deleteNotebyid(id)
+    await ElMessageBox.confirm('Delete this note?', 'Warning', { type: 'warning' })
+    await noteStore.removeNote(id)
     await loadNotes()
-
-    ElMessage.success('Note deleted successfully!')
+    ElMessage.success('Deleted!')
   } catch (err: any) {
-
-    if (err === 'cancel' || err === 'close') return
-    console.error('Failed to delete note', err)
-    ElMessage.error('Failed to delete note!')
-
+    if (err !== 'cancel') ElMessage.error('Failed!')
   }
 }
 

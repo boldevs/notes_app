@@ -74,3 +74,4 @@ D:\Personal Improvments\Software Egineer\Assignments\notes-application\NotesApp.
 D:\Personal Improvments\Software Egineer\Assignments\notes-application\NotesApp.Api\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
 D:\Personal Improvments\Software Egineer\Assignments\notes-application\NotesApp.Api\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 D:\Personal Improvments\Software Egineer\Assignments\notes-application\NotesApp.Api\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\Personal Improvments\Software Egineer\Assignments\notes-application\NotesApp.Api\obj\Debug\net9.0\NotesApp.Api.sourcelink.json
