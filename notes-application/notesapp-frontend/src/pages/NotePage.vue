@@ -32,7 +32,7 @@
 
     <!-- Note Cards List -->
     <div>
-      <div class="h-[calc(100vh-240px)] overflow-y-auto">
+      <div class="h-[calc(100vh-260px)] overflow-y-auto">
         <template v-if="filteredNotes.length">
           <NoteCard v-for="note in filteredNotes" :key="note.id" :title="note.title" :preview="note.content"
             :created-at="note.createdAt" :updated-at="note.updatedAt" @edit="() => editNote(note)"

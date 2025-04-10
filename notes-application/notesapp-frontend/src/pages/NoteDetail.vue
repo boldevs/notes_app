@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-3xl mx-auto mt-8 space-y-6">
-    <div class="h-[calc(100vh-240px)] overflow-y-auto">
+    <div class="h-[calc(100vh-260px)] overflow-y-auto">
       <el-card shadow="always">
       <template #header>
         <div class="text-lg font-bold">{{ selectedNote?.title }}</div>
