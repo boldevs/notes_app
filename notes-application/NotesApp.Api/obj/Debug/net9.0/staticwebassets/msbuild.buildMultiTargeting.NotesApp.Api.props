@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\NotesApp.Api.props" />
-</Project>
